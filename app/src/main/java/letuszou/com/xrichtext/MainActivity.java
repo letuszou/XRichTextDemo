@@ -1,6 +1,7 @@
 package letuszou.com.xrichtext;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,7 +19,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        //实际使用中部分5.0以上机型会崩溃  所以我建议 5.0以上的界面用原来
+        //框架的   4.4左右的用自己的框架就是可以的
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            //5.0以上
+            setContentView(R.layout.activity_main_new);
+        } else{
+            //4.4
+            setContentView(R.layout.activity_main_old);
+        }
+
         mEditor = (RichEditor) findViewById(R.id.editor);
         mEditor.setEditorHeight(200);
         mEditor.setEditorFontSize(22);
